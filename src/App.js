@@ -16,7 +16,7 @@ import {
 import reducers from './reducers';
 
 class App extends Component {
-  
+
   componentWillMount () {
     const config = {
       apiKey: FIREBASE_API_KEY,
