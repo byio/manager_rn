@@ -12,8 +12,9 @@ import {
   FIREBASE_STORAGE_BUCKET,
   FIREBASE_MESSAGING_SENDER_ID
 } from 'react-native-dotenv';
-
 import reducers from './reducers';
+import LoginForm from './components/LoginForm';
+
 
 class App extends Component {
 
@@ -32,11 +33,7 @@ class App extends Component {
   render () {
     return (
       <Provider store={createStore(reducers)}>
-        <View>
-          <Text>
-            Hello!
-          </Text>
-        </View>
+        <LoginForm />
       </Provider>
     );
   }
