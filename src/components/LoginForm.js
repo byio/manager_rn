@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 import { Card, CardSection, TextField, Button } from './common';
 
 class LoginForm extends Component {
+  // helper methods
+  onEmailChange (text) {
+
+  }
+
+  // render method
   render () {
     return (
       <Card>
@@ -11,6 +17,7 @@ class LoginForm extends Component {
           <TextField
             label="Email"
             placeholderText="username@email.com"
+            onChangeText={this.onEmailChange.bind(this)}
           />
         </CardSection>
 
