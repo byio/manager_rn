@@ -79,6 +79,7 @@ class LoginForm extends Component {
             placeholderText="username@email.com"
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
+            autoCapProp="none"
           />
         </CardSection>
 
