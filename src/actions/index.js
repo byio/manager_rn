@@ -1,5 +1,12 @@
 import firebase from 'firebase';
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER_START } from './types';
+import {
+  EMAIL_CHANGED,
+  PASSWORD_CHANGED,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_FAIL,
+  LOGIN_USER_START,
+  LOGOUT_USER
+} from './types';
 
 // emailChanged action creator
 export const emailChanged = (text) => {
@@ -30,6 +37,17 @@ export const loginUser = ({ email, password }) => {
                       .createUserWithEmailAndPassword(email, password)
                       .then(user => loginUserSuccess(dispatch, user))
                       .catch(() => loginUserFail(dispatch));
+            });
+  };
+};
+
+// logoutUser action creator
+export const logoutUser = () => {
+  return (dispatch) => {
+    firebase.auth()
+            .signOut()
+            .then(() => {
+              dispatch({ type: LOGOUT_USER });
             });
   };
 };

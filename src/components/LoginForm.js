@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, logoutUser } from '../actions';
 import { Card, CardSection, TextField, Button, Spinner } from './common';
 
 class LoginForm extends Component {
@@ -18,6 +18,10 @@ class LoginForm extends Component {
   handleUserLogin () {
     const { email, password } = this.props;
     this.props.loginUser({ email, password });
+  }
+
+  handleUserLogout () {
+    this.props.logoutUser();
   }
 
   renderError () {
@@ -36,6 +40,13 @@ class LoginForm extends Component {
     if (this.props.loading) {
       return (
         <Spinner />
+      );
+    }
+    if (this.props.user) {
+      return (
+        <Button onPressProp={this.handleUserLogout.bind(this)}>
+          Logout
+        </Button>
       );
     }
     return (
@@ -90,11 +101,11 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-  const { email, password, error, loading } = state.auth;
-  return { email, password, error, loading };
+  const { email, password, error, loading, user } = state.auth;
+  return { email, password, error, loading, user };
 };
 
 export default connect(
   mapStateToProps,
-  { emailChanged, passwordChanged, loginUser }
+  { emailChanged, passwordChanged, loginUser, logoutUser }
 )(LoginForm);
