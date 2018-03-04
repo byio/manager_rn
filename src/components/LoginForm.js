@@ -24,6 +24,18 @@ class LoginForm extends Component {
     this.props.logoutUser();
   }
 
+  renderError () {
+    if (this.props.error) {
+      return (
+        <View style={{ backgroundColor: '#fdfdfd' }}>
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
+        </View>
+      );
+    }
+  }
+
   renderNotification () {
     if (this.props.notification) {
       return (
@@ -80,6 +92,8 @@ class LoginForm extends Component {
           />
         </CardSection>
 
+        {this.renderError()}
+
         {this.renderNotification()}
 
         <CardSection>
@@ -93,16 +107,21 @@ class LoginForm extends Component {
 }
 
 const styles = {
-  notificationTextStyle: {
+  errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
     color: '#ff3333'
+  },
+  notificationTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: '#00e500'
   }
 };
 
 const mapStateToProps = state => {
-  const { email, password, notification, loading, user } = state.auth;
-  return { email, password, notification, loading, user };
+  const { email, password, error, notification, loading, user } = state.auth;
+  return { email, password, error, notification, loading, user };
 };
 
 export default connect(

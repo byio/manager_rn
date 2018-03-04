@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   user: null,
+  error: '',
   notification: '',
   loading: false
 };
@@ -15,13 +16,13 @@ export default (state = INITIAL_STATE, action) => {
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
     case LOGIN_USER_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state, ...INITIAL_STATE, user: action.payload, notification: 'You are now logged in.' };
     case LOGIN_USER_FAIL:
-      return { ...state, notification: 'Invalid credentials.', password: '', loading: false };
+      return { ...state, error: 'Invalid credentials.', password: '', loading: false };
     case LOGIN_USER_START:
       return { ...state, loading: true, error: '' }
     case LOGOUT_USER:
-      return { ...state, user: null }
+      return { ...state, user: null, notification: 'You are now logged out.' }
     default:
       return state;
   };
