@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   user: null,
-  error: '',
+  notification: '',
   loading: false
 };
 
@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGIN_USER_SUCCESS:
       return { ...state, ...INITIAL_STATE, user: action.payload };
     case LOGIN_USER_FAIL:
-      return { ...state, error: 'Invalid credentials.', password: '', loading: false };
+      return { ...state, notification: 'Invalid credentials.', password: '', loading: false };
     case LOGIN_USER_START:
       return { ...state, loading: true, error: '' }
     case LOGOUT_USER:
