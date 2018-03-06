@@ -13,7 +13,8 @@ import {
   FIREBASE_MESSAGING_SENDER_ID
 } from 'react-native-dotenv';
 import reducers from './reducers';
-import LoginForm from './components/LoginForm';
+import Router from './Router';
+// import LoginForm from './components/LoginForm';
 
 class App extends Component {
 
@@ -34,7 +35,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <LoginForm />
+        <Router />
       </Provider>
     );
   }
