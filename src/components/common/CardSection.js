@@ -7,7 +7,7 @@ const CardSection = (props) => {
   // destructure styles object
   const { containerStyles } = styles
   return (
-    <View style={containerStyles}>
+    <View style={[ containerStyles, props.style ]}>
       {props.children}
     </View>
   );

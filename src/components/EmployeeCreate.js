@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { View, Text, Picker } from 'react-native';
 
 import { employeeUpdate } from '../actions';
 import { Card, CardSection, TextField, Button } from './common';
 
 class EmployeeCreate extends Component {
+  // helper methods
+  renderPickerItems () {
+    const shifts = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    return shifts.map(shift => {
+      return <Picker.Item key={shift} label={shift} value={shift}/>
+    });
+  }
+
   // render method
   render () {
     return (
@@ -35,8 +44,19 @@ class EmployeeCreate extends Component {
               })}
           />
         </CardSection>
-        <CardSection>
-
+        {/* Shift RN Picker */}
+        <CardSection style={{ flexDirection: 'column' }}>
+          <Text style={styles.pickerLabelStyles}>Shift</Text>
+          <Picker
+            selectedValue={this.props.shift}
+            onValueChange={
+              value => this.props.employeeUpdate({
+                prop:'shift',
+                value
+              })}
+          >
+            {this.renderPickerItems()}
+          </Picker>
         </CardSection>
         {/* Create Button */}
         <CardSection>
@@ -48,6 +68,14 @@ class EmployeeCreate extends Component {
     );
   }
 }
+
+const styles = {
+  pickerLabelStyles: {
+    fontSize: 18,
+    paddingLeft: 20,
+    paddingTop: 10
+  }
+};
 
 const mapStateToProps = state => {
   const { name, phone, shift } = state.employeeForm;
