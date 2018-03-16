@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Card, CardSection, TextField, Button } from './common';
 
 class EmployeeCreate extends Component {
   render () {
     return (
-      <View>
-        <Text>
-          Form to create new employee.
-        </Text>
-      </View>
+      <Card>
+        {/* Employee's Name */}
+        <CardSection>
+          <TextField
+            label="Name"
+            placeholderText="eg. Jane Doe"
+          />
+        </CardSection>
+        {/* Employee's Contact Number */}
+        <CardSection>
+          <TextField
+            label="Phone"
+            placeholderText="555-555-5555"
+          />
+        </CardSection>
+        <CardSection>
+
+        </CardSection>
+        {/* Create Button */}
+        <CardSection>
+          <Button>
+            Create Employee
+          </Button>
+        </CardSection>
+      </Card>
     );
   }
 }
