@@ -14,6 +14,13 @@ class EmployeeCreate extends Component {
     });
   }
 
+  onButtonPress () {
+    // extract props from form
+    const { name, phone, shift } = this.props;
+    // call employeeCreate action creator
+    this.props.employeeCreate({ name, phone, shift });
+  }
+
   // render method
   render () {
     return (
@@ -60,7 +67,7 @@ class EmployeeCreate extends Component {
         </CardSection>
         {/* Create Button */}
         <CardSection>
-          <Button>
+          <Button onPressProp={this.onButtonPress.bind(this)}>
             Create Employee
           </Button>
         </CardSection>
