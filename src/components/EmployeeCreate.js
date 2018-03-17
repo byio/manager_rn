@@ -18,7 +18,7 @@ class EmployeeCreate extends Component {
     // extract props from form
     const { name, phone, shift } = this.props;
     // call employeeCreate action creator
-    this.props.employeeCreate({ name, phone, shift });
+    this.props.employeeCreate({ name, phone, shift: shift || 'Monday' });
   }
 
   // render method
