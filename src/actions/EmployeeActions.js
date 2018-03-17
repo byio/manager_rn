@@ -19,9 +19,9 @@ export const employeeCreate = ({ name, phone, shift }) => {
   // extract current user from firebase auth
   const { currentUser } = firebase.auth();
   // use return here as a workaround to an error for not using redux-thunk properly
-  return {
+  return () => {
     firebase.database()
-            .ref(`/users/${currentUser}/employees`)
+            .ref(`/users/${currentUser.uid}/employees`)
             .push({ name, phone, shift });
   };
 };
