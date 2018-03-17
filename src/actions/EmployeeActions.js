@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
-import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE } from './types';
+import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS } from './types';
 
 /*
   this employeeUpdate action creator handles ANY update to
@@ -27,6 +27,19 @@ export const employeeCreate = ({ name, phone, shift }) => {
             .then(() => {
               dispatch({ type: EMPLOYEE_CREATE });
               Actions.pop();
+            });
+  };
+};
+
+export const employeesFetch = () => {
+  // extract current user from firebase auth
+  const { currentUser } = firebase.auth();
+  // use redux-thunk while fetching data from firebase (async function)
+  return (dispatch) => {
+    firebase.database()
+            .ref(`/users/${currentUser.uid}/employees`)
+            .on('value', snapshot => {
+              dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
             });
   };
 };
