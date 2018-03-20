@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { FlatList } from 'react-native';
 
+import EmployeeListItem from './EmployeeListItem';
 import { employeesFetch } from '../actions';
 
 class EmployeeList extends Component {
@@ -11,17 +12,22 @@ class EmployeeList extends Component {
     this.props.employeesFetch();
   }
 
+  // renderItem method for FlatList
+  renderItem (employee) {
+    // console.log('employee: ', employee);
+    return <EmployeeListItem employeeProp={employee} />
+  }
+
   // render method
   render () {
-    console.log(this.props);
     return (
-      <View>
-        <Text>Employee 1</Text>
-        <Text>Employee 2</Text>
-        <Text>Employee 3</Text>
-        <Text>Employee 4</Text>
-        <Text>Employee 5</Text>
-      </View>
+      <FlatList
+        data={this.props.employees}
+        renderItem={this.renderItem}
+        keyExtractor={(employee, index) => 
+          employee.uid.toString()
+        }
+      />
     );
   }
 }
