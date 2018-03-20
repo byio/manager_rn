@@ -13,6 +13,7 @@ class EmployeeList extends Component {
 
   // render method
   render () {
+    console.log(this.props);
     return (
       <View>
         <Text>Employee 1</Text>
@@ -25,4 +26,18 @@ class EmployeeList extends Component {
   }
 }
 
-export default connect(null, { employeesFetch })(EmployeeList);
+const mapStateToProps = state => {
+  /*
+    _.map creates key value pairs out of the firebase data
+    object, and pushes them into an array defined as
+    employees
+  */
+  const employees = _.map(state.employees, (val, uid) => {
+    return { ...val, uid };
+  });
+
+  // return the employees array as a prop
+  return { employees };
+};
+
+export default connect(mapStateToProps, { employeesFetch })(EmployeeList);
