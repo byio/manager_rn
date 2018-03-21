@@ -43,3 +43,15 @@ export const employeesFetch = () => {
             });
   };
 };
+
+export const employeeChangeDetails = ({ name, phone, shift, uid }) => {
+  // extract current user from firebase auth
+  const { currentUser } = firebase.auth();
+  // use redux-thunk while fetching data from firebase (async function)
+  return () => {
+    firebase.database()
+            .ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .set({ name, phone, shift })
+            .then(() => console.log('saved!'));
+  };
+};

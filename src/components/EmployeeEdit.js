@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { employeeUpdate } from '../actions';
+import { employeeUpdate, employeeChangeDetails } from '../actions';
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
 
@@ -28,7 +28,10 @@ class EmployeeEdit extends Component {
   // helper methods
   onButtonPress () {
     const { name, phone, shift } = this.props;
-    console.log(name, phone, shift);
+    // console.log(`logging new data in redux store (not firebase): ${name} ${phone} ${shift}`);
+    // console.log(this.props.employee.uid);
+    // invoke action creator to save changes made onto firebase db
+    this.props.employeeChangeDetails({ name, phone, shift, uid: this.props.employee.uid });
   }
 
   // render method
@@ -54,5 +57,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { employeeUpdate }
+  { employeeUpdate, employeeChangeDetails }
 )(EmployeeEdit);
