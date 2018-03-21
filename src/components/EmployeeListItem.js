@@ -8,7 +8,9 @@ class EmployeeListItem extends Component {
 
   // helper methods
   onRowPress () {
-    Actions.employeeCreate();
+    Actions.employeeCreate({
+      employee: this.props.employeeProp.item
+    });
   }
 
   // render method
