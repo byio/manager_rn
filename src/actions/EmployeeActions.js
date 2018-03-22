@@ -52,6 +52,8 @@ export const employeeChangeDetails = ({ name, phone, shift, uid }) => {
     firebase.database()
             .ref(`/users/${currentUser.uid}/employees/${uid}`)
             .set({ name, phone, shift })
-            .then(() => console.log('saved!'));
+            .then(() => {
+              Actions.pop();
+            });
   };
 };
