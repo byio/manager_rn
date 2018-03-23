@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Communication from 'react-native-communications';
+import Communications from 'react-native-communications';
 
 import { employeeUpdate, employeeChangeDetails, employeeFormReset } from '../actions';
 import { Card, CardSection, Button } from './common';
@@ -39,17 +39,33 @@ class EmployeeEdit extends Component {
     this.props.employeeChangeDetails({ name, phone, shift, uid: this.props.employee.uid });
   }
 
+  onTextPress () {
+    // extract values from props
+    const { name, phone, shift } = this.props;
+    // invoke texting function
+    Communications.text(phone, `Hi ${name}, your upcoming shift is on ${shift}.`);
+  }
+
   // render method
   render () {
     // console.log(this.props.employee);
     return (
       <Card>
+        
         <EmployeeForm />
+
         <CardSection>
           <Button onPressProp={this.onButtonPress.bind(this)}>
             Save Changes
           </Button>
         </CardSection>
+
+        <CardSection>
+          <Button onPressProp={this.onTextPress.bind(this)}>
+            Text Shift
+          </Button>
+        </CardSection>
+
       </Card>
     );
   }
