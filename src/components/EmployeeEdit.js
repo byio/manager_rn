@@ -51,7 +51,7 @@ class EmployeeEdit extends Component {
     // console.log(this.props.employee);
     return (
       <Card>
-        
+
         <EmployeeForm />
 
         <CardSection>
@@ -63,6 +63,12 @@ class EmployeeEdit extends Component {
         <CardSection>
           <Button onPressProp={this.onTextPress.bind(this)}>
             Text Shift
+          </Button>
+        </CardSection>
+
+        <CardSection>
+          <Button>
+            Fire Employee
           </Button>
         </CardSection>
 
