@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { employeeUpdate, employeeChangeDetails } from '../actions';
+import { employeeUpdate, employeeChangeDetails, employeeFormReset } from '../actions';
 import { Card, CardSection, Button } from './common';
 import EmployeeForm from './EmployeeForm';
 
@@ -23,6 +23,10 @@ class EmployeeEdit extends Component {
     _.each(this.props.employee, (value, prop) => {
       this.props.employeeUpdate({ prop, value });
     });
+  }
+
+  componentWillUnmount () {
+    this.props.employeeFormReset();
   }
 
   // helper methods
@@ -57,5 +61,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { employeeUpdate, employeeChangeDetails }
+  { employeeUpdate, employeeChangeDetails, employeeFormReset }
 )(EmployeeEdit);

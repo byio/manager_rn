@@ -1,7 +1,13 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 
-import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS, EMPLOYEE_CHANGE_DETAILS_SUCCESS } from './types';
+import {
+  EMPLOYEE_UPDATE,
+  EMPLOYEE_CREATE,
+  EMPLOYEES_FETCH_SUCCESS,
+  EMPLOYEE_CHANGE_DETAILS_SUCCESS,
+  EMPLOYEE_FORM_RESET
+} from './types';
 
 /*
   this employeeUpdate action creator handles ANY update to
@@ -56,5 +62,11 @@ export const employeeChangeDetails = ({ name, phone, shift, uid }) => {
               dispatch({ type: EMPLOYEE_CHANGE_DETAILS_SUCCESS });
               Actions.pop();
             });
+  };
+};
+
+export const employeeFormReset = () => {
+  return {
+    type: EMPLOYEE_FORM_RESET
   };
 };

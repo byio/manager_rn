@@ -1,5 +1,10 @@
 // import action types
-import { EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEE_CHANGE_DETAILS_SUCCESS } from '../actions/types';
+import {
+  EMPLOYEE_UPDATE,
+  EMPLOYEE_CREATE,
+  EMPLOYEE_CHANGE_DETAILS_SUCCESS,
+  EMPLOYEE_FORM_RESET
+} from '../actions/types';
 
 // define initial state
 const INITIAL_STATE = {
@@ -17,6 +22,8 @@ export default (state = INITIAL_STATE, action) => {
     case EMPLOYEE_CREATE:
       return INITIAL_STATE;
     case EMPLOYEE_CHANGE_DETAILS_SUCCESS:
+      return INITIAL_STATE;
+    case EMPLOYEE_FORM_RESET:
       return INITIAL_STATE;
     default:
       return state;
