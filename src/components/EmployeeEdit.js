@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Communication from 'react-native-communications';
 
 import { employeeUpdate, employeeChangeDetails, employeeFormReset } from '../actions';
 import { Card, CardSection, Button } from './common';
