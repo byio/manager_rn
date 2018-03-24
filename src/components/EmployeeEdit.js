@@ -56,6 +56,10 @@ class EmployeeEdit extends Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
+  onDecline () {
+    this.setState({ showModal: false });
+  }
+
   // render method
   render () {
     // console.log(this.props.employee);
@@ -84,6 +88,7 @@ class EmployeeEdit extends Component {
 
         <ConfirmModal
           visible={this.state.showModal}
+          onDecline={this.onDecline.bind(this)}
         >
           Are you sure you want to fire this employee?
         </ConfirmModal>
