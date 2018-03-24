@@ -4,10 +4,16 @@ import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 
 import { employeeUpdate, employeeChangeDetails, employeeFormReset } from '../actions';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, ConfirmModal } from './common';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeEdit extends Component {
+
+  // component level state
+  state = {
+    showModal: false
+  };
+
   // lifecycle methods
   /*
     when this component is about to be mounted, take the
@@ -46,6 +52,10 @@ class EmployeeEdit extends Component {
     Communications.text(phone, `Hi ${name}, your upcoming shift is on ${shift}.`);
   }
 
+  onFirePress () {
+    this.setState({ showModal: !this.state.showModal });
+  }
+
   // render method
   render () {
     // console.log(this.props.employee);
@@ -67,10 +77,16 @@ class EmployeeEdit extends Component {
         </CardSection>
 
         <CardSection>
-          <Button>
+          <Button onPressProp={this.onFirePress.bind(this)}>
             Fire Employee
           </Button>
         </CardSection>
+
+        <ConfirmModal
+          visible={this.state.showModal}
+        >
+          Are you sure you want to fire this employee?
+        </ConfirmModal>
 
       </Card>
     );
