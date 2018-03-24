@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 
-import { employeeUpdate, employeeChangeDetails, employeeFormReset } from '../actions';
+import { employeeUpdate, employeeChangeDetails, employeeFormReset, employeeFire } from '../actions';
 import { Card, CardSection, Button, ConfirmModal } from './common';
 import EmployeeForm from './EmployeeForm';
 
@@ -56,6 +56,13 @@ class EmployeeEdit extends Component {
     this.setState({ showModal: !this.state.showModal });
   }
 
+  onAccept () {
+    // destructure uid from this.props.employee
+    const { uid } = this.props.employee;
+    // invoke action creator
+    this.props.employeeFire({ uid });
+  }
+
   onDecline () {
     this.setState({ showModal: false });
   }
@@ -88,6 +95,7 @@ class EmployeeEdit extends Component {
 
         <ConfirmModal
           visible={this.state.showModal}
+          onAccept={this.onAccept.bind(this)}
           onDecline={this.onDecline.bind(this)}
         >
           Are you sure you want to fire this employee?
@@ -105,5 +113,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { employeeUpdate, employeeChangeDetails, employeeFormReset }
+  { employeeUpdate, employeeChangeDetails, employeeFormReset, employeeFire }
 )(EmployeeEdit);
