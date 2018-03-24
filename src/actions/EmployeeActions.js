@@ -70,3 +70,17 @@ export const employeeFormReset = () => {
     type: EMPLOYEE_FORM_RESET
   };
 };
+
+export const employeeFire = () => {
+  // extract current user from firebase auth
+  const { currentUser } = firebase.auth();
+  // use return here as a workaround to an error for not using redux-thunk properly
+  return () => {
+    firebase.database()
+            .ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove()
+            .then(() => {
+              Actions.pop();
+            });
+  };
+};
